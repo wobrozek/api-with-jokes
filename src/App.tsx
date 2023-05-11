@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
-import Main from "./pages/main";
-import Watchlist from "./pages/watchlist";
+import Main from "./pages/Main";
+import Watchlist from "./pages/Watchlist";
 import CustomJokes from "./pages/CustomJokes";
 import Layout from "./pages/Layout";
 
