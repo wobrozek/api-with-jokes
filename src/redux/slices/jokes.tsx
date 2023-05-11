@@ -68,6 +68,6 @@ const jokeSlice = createSlice({
   },
 });
 
-export const { add, remove, edit } = jokeSlice.actions;
+export const { add } = jokeSlice.actions;
 
 export default jokeSlice.reducer;

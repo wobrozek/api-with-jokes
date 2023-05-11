@@ -11,8 +11,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  languages: languagesRedcuer,
-  form: formReducer,
+  user: userReducer,
+  jokes: jokesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
