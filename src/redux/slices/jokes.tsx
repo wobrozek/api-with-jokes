@@ -13,8 +13,8 @@ const options = {
 
 export type Jokes = {
   jokes: Joke[];
-  status: string;
-  error: null | string;
+  isLoading: boolean;
+  isError: boolean;
 };
 
 export type Joke = {
@@ -26,10 +26,11 @@ export type Joke = {
 
 const initialState: Jokes = {
   jokes: [],
-  status: "idle", //idle sucesed loading failure
-  error: null,
+  isLoading: false, 
+  isError: false,
 };
 
+//Acion
 export const fetchGet = createAsyncThunk("get/fetchPosts", async () => {
   try {
     const response = await axios.request(options);
@@ -65,6 +66,19 @@ const jokeSlice = createSlice({
     //     return element;
     //   });
     // },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchGet.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchGet.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.jokes = action.payload;
+    });
+    builder.addCase(fetchGet.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
   },
 });
 
