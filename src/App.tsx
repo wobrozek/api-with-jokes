@@ -1,9 +1,23 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import { Routes, BrowserRouter, Route } from "react-router-dom";
+import Main from "./pages/main";
+import Watchlist from "./pages/watchlist";
+import CustomJokes from "./pages/CustomJokes";
+import Layout from "./pages/Layout";
 
 function App() {
-  return <div className="App">elo</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" Component={Layout}>
+          <Route path="main" Component={Main}></Route>
+          <Route path="watchlist" Component={Watchlist}></Route>
+          <Route path="customJokes" Component={CustomJokes}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
