@@ -18,7 +18,7 @@ export type Jokes = {
 };
 
 export type Joke = {
-  id: string;
+  id?: string;
   punchline: string;
   setup: string;
   type: string;

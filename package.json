@@ -18,13 +18,12 @@
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --testPathPattern=src/tests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "typescript": "^5.0.4"
   }
 }
