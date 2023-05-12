@@ -4,11 +4,7 @@ import axios from "axios";
 
 const options = {
   method: "GET",
-  url: "https://dad-jokes.p.rapidapi.com/joke/type/general",
-  headers: {
-    "X-RapidAPI-Key": process.env.REACT_APP_X_RapidAPI_Key,
-    "X-RapidAPI-Host": process.env.REACT_APP_X_RapidAPI_Host,
-  },
+  url: "https://v2.jokeapi.dev/joke/Any?type=twopart&amount=10",
 };
 
 export type Jokes = {
@@ -20,20 +16,21 @@ export type Jokes = {
 export type Joke = {
   id?: string;
   punchline: string;
-  setup: string;
-  type: string;
+  delivery: string;
+  category: string;
 };
 
 const initialState: Jokes = {
   jokes: [],
-  isLoading: false, 
+  isLoading: false,
   isError: false,
 };
 
 //Acion
-export const fetchGet = createAsyncThunk("get/fetchPosts", async () => {
+export const fetchGet = createAsyncThunk("fetchGet", async () => {
   try {
     const response = await axios.request(options);
+    console.log("Working");
     return { ...response.data };
   } catch (err: any) {
     return err.message;
@@ -52,19 +49,6 @@ const jokeSlice = createSlice({
         jokes: [...state.jokes, data.payload],
       };
     },
-    // remove: (state, id: PayloadAction<string>) => {
-    //   state.jokes = state.jokes.filter((element) => {
-    //     return element.id !== id.payload;
-    //   });
-    // },
-    // edit: (state, data: PayloadAction<Joke>) => {
-    //   state.jokes = state.jokes.map((element) => {
-    //     if (element.id === data.payload.id) {
-    //       return data.payload;
-    //     }
-    //     return element;
-    //   });
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchGet.pending, (state, action) => {
@@ -72,7 +56,7 @@ const jokeSlice = createSlice({
     });
     builder.addCase(fetchGet.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.jokes = action.payload;
+      state.jokes = action.payload.jokes;
     });
     builder.addCase(fetchGet.rejected, (state, action) => {
       console.log("Error", action.payload);

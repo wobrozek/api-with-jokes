@@ -1,14 +1,12 @@
-import React from "react";
-import JokeWraperWatchlist from "../components/molecules/JokeWraperWatchlist";
+import React, { useState } from "react";
 import JokeWraper from "../components/molecules/JokeWraper";
 import { RootState } from "../redux/store";
-import user from "../redux/slices/user";
 import { useSelector } from "react-redux";
 
 const Watchlist = () => {
-  const watchlist = useSelector((state: RootState) => user.watchlist);
+  const watchlist = useSelector((state: RootState) => state.user.watchlist);
 
-  return <JokeWraper jokes={watchlist} />;
+  return <JokeWraper jokes={watchlist} isStared={true} />;
 };
 
 export default Watchlist;

@@ -18,7 +18,7 @@ const userSlice = createSlice({
     addWatchlist: (state, joke: PayloadAction<Joke>) => {
       return {
         ...state,
-        watchlist: [...state.watchlist, joke],
+        watchlist: [...state.watchlist, joke.payload],
       };
     },
     removeWatchlist: (state, id: PayloadAction<string>) => {
