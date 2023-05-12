@@ -1,15 +1,16 @@
 import { TextField, MenuItem } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React, { ChangeEventHandler } from "react";
-import { useDispatch } from "react-redux";
 import jokes, { Joke } from "../../redux/slices/jokes";
-import { addJoke } from "../../redux/slices/user";
+import { AnyAction } from "@reduxjs/toolkit";
 
-const form = () => {
+const form = (
+  callback: (joke: Joke) => AnyAction,
+  defaultValue: Joke = { delivery: "", punchline: "", category: "dark" }
+) => {
   const [category, setCategory] = React.useState("");
   const [delivery, setDelivery] = React.useState("");
   const [punchline, setPunchline] = React.useState("");
-  const dispatch = useDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
@@ -36,7 +37,7 @@ const form = () => {
       punchline: punchline,
     };
 
-    dispatch(addJoke(joke));
+    callback(joke);
   };
 
   return (
@@ -44,11 +45,13 @@ const form = () => {
       <TextField
         label="delivery"
         value={delivery}
+        defaultValue={defaultValue?.delivery}
         onChange={handleChangeDelivery}
       />
       <TextField
         label="Punch Line"
         value={punchline}
+        defaultValue={defaultValue?.punchline}
         onChange={handleChangePunchline}
       />
 
@@ -56,7 +59,7 @@ const form = () => {
         value={category}
         label="Category"
         onChange={handleChange}
-        defaultValue={"Dark"}
+        defaultValue={defaultValue?.category}
       >
         <MenuItem value={"Programming"}>Programming</MenuItem>
         <MenuItem value={"Miscellaneous"}>Miscellaneous</MenuItem>
