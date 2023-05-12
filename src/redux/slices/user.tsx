@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
 import { Joke } from "./jokes";
 
-type user = {
+type User = {
   watchlist: Joke[];
   ownJokes: Joke[];
 };
 
-const initialState: user = {
+const initialState: User = {
   watchlist: [],
   ownJokes: [],
 };
@@ -15,8 +15,17 @@ const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    toggleWatchList: (state, id: PayloadAction<string>) => {
-      console.log("hej");
+    addWatchlist: (state, joke: PayloadAction<Joke>) => {
+      return {
+        ...state,
+        watchlist: [...state.watchlist, joke],
+      };
+    },
+    removeWatchlist: (state, id: PayloadAction<string>) => {
+      return {
+        ...state,
+        watchlist: state.watchlist.filter((joke) => joke.id != id.payload),
+      };
     },
     addJoke: (state, data: PayloadAction<Joke>) => {
       const id = nanoid();
@@ -43,7 +52,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { toggleWatchList, editJoke, addJoke, removeJoke } =
+export const { addWatchlist, removeWatchlist, editJoke, addJoke, removeJoke } =
   userSlice.actions;
 
 export default userSlice.reducer;

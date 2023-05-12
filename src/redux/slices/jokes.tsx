@@ -47,7 +47,6 @@ const jokeSlice = createSlice({
     add: (state, data: PayloadAction<Joke>) => {
       const id = nanoid();
       data.payload.id = id;
-
       return {
         ...state,
         jokes: [...state.jokes, data.payload],
