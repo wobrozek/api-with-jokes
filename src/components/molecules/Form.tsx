@@ -1,11 +1,15 @@
 import { TextField, MenuItem } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React, { ChangeEventHandler } from "react";
+import { useDispatch } from "react-redux";
+import jokes, { Joke } from "../../redux/slices/jokes";
+import { addJoke } from "../../redux/slices/user";
 
 const form = () => {
   const [category, setCategory] = React.useState("");
   const [delivery, setDelivery] = React.useState("");
   const [punchline, setPunchline] = React.useState("");
+  const dispatch = useDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
@@ -23,8 +27,20 @@ const form = () => {
     setPunchline(event.target.value as string);
   };
 
+  const handleSubmit = (e: React.FormEventHandler<HTMLFormElement>) => {
+    e.perventDefault();
+
+    const joke: Joke = {
+      category: category,
+      delivery: delivery,
+      punchline: punchline,
+    };
+
+    dispatch(addJoke(joke));
+  };
+
   return (
-    <form onSubmit={(e) => props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <TextField
         label="delivery"
         value={delivery}
