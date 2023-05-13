@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Joke } from "../../redux/slices/jokes";
 import { Button } from "@mui/material";
 import StarToggle from "../atoms/starToggle";
@@ -22,9 +22,9 @@ const JokeBox = ({
   ownJoke = false,
 }: Props) => {
   const [open, setOpen] = useState<Boolean>(false);
-  const dispatch = useDispatch();
   const watchlist = useSelector((state: RootState) => state.user.watchlist);
   const [isStaredState, isSetstaredState] = useState<Boolean>(isStared);
+  const dispatch = useDispatch();
 
   // popup to edit values
   const [openPopup, setOpenPopup] = useState(false);

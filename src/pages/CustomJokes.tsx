@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "../components/molecules/Form";
-import JokeWraper from "../components/molecules/JokeWraper";
+import JokeWraper from "../components/organisms/JokeWraper";
 import user, { addJoke } from "../redux/slices/user";
 import { RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";

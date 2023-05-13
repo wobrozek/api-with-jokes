@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import JokeWraper from "../components/molecules/JokeWraper";
+import JokeWraper from "../components/organisms/JokeWraper";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
 

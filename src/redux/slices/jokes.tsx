@@ -15,7 +15,7 @@ export type Jokes = {
 
 export type Joke = {
   id?: string;
-  setup: string;
+  setu: string;
   delivery: string;
   category: string;
 };
