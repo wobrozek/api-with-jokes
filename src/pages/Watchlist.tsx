@@ -6,7 +6,11 @@ import { useSelector } from "react-redux";
 const Watchlist = () => {
   const watchlist = useSelector((state: RootState) => state.user.watchlist);
 
-  return <JokeWraper jokes={watchlist} isStared={true} />;
+  return (
+    <main className="main main_watchlist">
+      <JokeWraper jokes={watchlist} isStared={true} />
+    </main>
+  );
 };
 
 export default Watchlist;

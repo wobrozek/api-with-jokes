@@ -15,7 +15,7 @@ const CustomJokes = () => {
   }
 
   return (
-    <main>
+    <main className="main main_custom">
       <Form
         callback={(joke: Joke) => {
           handleAddJoke(joke);

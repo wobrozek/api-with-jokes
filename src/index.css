@@ -11,3 +11,72 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.main {
+  max-width: 500px;
+  margin: 25px auto;
+}
+
+header {
+  background-color: #fff;
+  padding: 25px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  -webkit-box-shadow: 0px -2px 20px 0px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0px -2px 20px 0px rgba(66, 68, 90, 1);
+  box-shadow: 0px -2px 20px 0px rgba(66, 68, 90, 1);
+  z-index: 100;
+}
+
+.joke-box {
+  border: 1px solid #2f3542;
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 2px -2px #ffa502;
+}
+
+.joke-box__setup {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.joke-box svg {
+  fill: #ffa502;
+  height: 25px;
+}
+
+.joke-box button {
+  padding: 0;
+}
+
+.joke-box__delivery {
+  padding: 5px 0;
+}
+
+.joke-box button {
+  margin: auto;
+}
+
+nav a {
+  margin: 0 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #ffa502;
+}
+
+a:hover {
+  color: #eccc68;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px;
+}

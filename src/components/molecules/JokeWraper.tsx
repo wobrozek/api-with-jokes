@@ -5,7 +5,7 @@ import JokeBox from "../organisms/JokeBox";
 type Props = {
   jokes: Joke[];
   isStared: Boolean;
-  ownJoke: Boolean;
+  ownJoke?: Boolean;
 };
 
 const JokeWraper = (props: Props) => {

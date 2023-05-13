@@ -49,26 +49,27 @@ const JokeBox = ({
   };
 
   return (
-    <div className="jokeBox">
-      <div className="jokeBox__delivery">{joke.setup}</div>
-      {open && <div className="punchline">{joke.delivery}</div>}
-
-      {ownJoke ? (
-        <div>
-          <Button onClick={handleOpenPopup}>
-            <EditIcon />
-          </Button>
-          <Button
-            onClick={() => {
-              dispatch(removeJoke(joke?.id));
-            }}
-          >
-            <DeleteIcon />
-          </Button>
-        </div>
-      ) : (
-        <StarToggle handleClick={handleClick} isStared={isStaredState} />
-      )}
+    <div className="joke-box">
+      <div className="joke-box__setup">
+        {joke.setup}
+        {ownJoke ? (
+          <div>
+            <Button onClick={handleOpenPopup}>
+              <EditIcon />
+            </Button>
+            <Button
+              onClick={() => {
+                dispatch(removeJoke(joke?.id));
+              }}
+            >
+              <DeleteIcon />
+            </Button>
+          </div>
+        ) : (
+          <StarToggle handleClick={handleClick} isStared={isStaredState} />
+        )}
+      </div>
+      {open && <div className="joke-box__delivery">{joke.delivery}</div>}
 
       <Button
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {

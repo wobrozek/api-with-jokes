@@ -14,7 +14,11 @@ const Main = () => {
     }
   }, []);
 
-  return <JokeWraper jokes={api.jokes} isStared={false} />;
+  return (
+    <main className="main main_api">
+      <JokeWraper jokes={api.jokes} isStared={false} />
+    </main>
+  );
 };
 
 export default Main;
