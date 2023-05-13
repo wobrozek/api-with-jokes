@@ -1,6 +1,6 @@
 import { TextField, MenuItem, Button } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { Joke } from "../../redux/slices/jokes";
 
 type Props = {
@@ -38,21 +38,33 @@ const Form = (props: Props) => {
       setup: delivery,
       delivery: punchline,
     };
+
+    // add id if edit
+    if (props.defaultValue?.id != undefined) {
+      joke.id = props.defaultValue.id;
+    }
+
     callback(joke);
   };
+
+  useEffect(() => {
+    if (defaultValue !== undefined) {
+      setDelivery(defaultValue?.setup);
+      setPunchline(defaultValue?.delivery);
+      setCategory(defaultValue?.category);
+    }
+  }, [defaultValue]);
 
   return (
     <form onSubmit={handleSubmit}>
       <TextField
         label="delivery"
         value={delivery}
-        defaultValue={defaultValue?.setup}
         onChange={handleChangeDelivery}
       />
       <TextField
         label="Punch Line"
         value={punchline}
-        defaultValue={defaultValue?.delivery}
         onChange={handleChangePunchline}
       />
 
@@ -60,7 +72,7 @@ const Form = (props: Props) => {
         value={category}
         label="Category"
         onChange={handleChange}
-        defaultValue={defaultValue?.category || "Dark"}
+        defaultValue={"Dark"}
       >
         <MenuItem value={"Programming"}>Programming</MenuItem>
         <MenuItem value={"Miscellaneous"}>Miscellaneous</MenuItem>
