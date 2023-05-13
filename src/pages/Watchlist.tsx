@@ -8,6 +8,7 @@ const Watchlist = () => {
 
   return (
     <main className="main main_watchlist">
+      <h2>Watchlist</h2>
       <JokeWraper jokes={watchlist} isStared={true} />
     </main>
   );

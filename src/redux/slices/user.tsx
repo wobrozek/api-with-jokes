@@ -16,10 +16,22 @@ const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     addWatchlist: (state, joke: PayloadAction<Joke>) => {
-      return {
-        ...state,
-        watchlist: [...state.watchlist, joke.payload],
-      };
+      let double = false;
+
+      //prevent doble key
+      //becouse we don't update api there is posibility to have to same element in watchlist
+      state.watchlist.forEach((element) => {
+        if (element.id === joke.payload.id) {
+          double = true;
+        }
+      });
+
+      if (!double) {
+        return {
+          ...state,
+          watchlist: [...state.watchlist, joke.payload],
+        };
+      }
     },
     removeWatchlist: (state, id: PayloadAction<string>) => {
       return {
