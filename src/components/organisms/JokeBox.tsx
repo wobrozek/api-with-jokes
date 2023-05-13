@@ -69,7 +69,11 @@ const JokeBox = ({
           <StarToggle handleClick={handleClick} isStared={isStaredState} />
         )}
       </div>
-      {open && <div className="joke-box__delivery">{joke.delivery}</div>}
+      {open && (
+        <div className="joke-box__delivery">
+          <strong>{joke.delivery}</strong>
+        </div>
+      )}
 
       <Button
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
