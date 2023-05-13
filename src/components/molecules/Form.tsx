@@ -1,13 +1,15 @@
-import { TextField, MenuItem } from "@mui/material";
+import { TextField, MenuItem, Button } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { ChangeEventHandler } from "react";
-import jokes, { Joke } from "../../redux/slices/jokes";
-import { AnyAction } from "@reduxjs/toolkit";
+import React, { ChangeEvent } from "react";
+import { Joke } from "../../redux/slices/jokes";
 
-const form = (
-  callback: (joke: Joke) => AnyAction,
-  defaultValue: Joke = { delivery: "", punchline: "", category: "dark" }
-) => {
+type Props = {
+  callback: (joke: Joke) => void;
+  defaultValue?: Joke;
+};
+
+const Form = (props: Props) => {
+  const { callback, defaultValue } = props;
   const [category, setCategory] = React.useState("");
   const [delivery, setDelivery] = React.useState("");
   const [punchline, setPunchline] = React.useState("");
@@ -17,26 +19,25 @@ const form = (
   };
 
   const handleChangeDelivery = (
-    event: ChangeEventHandler<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setDelivery(event.target.value as string);
   };
 
   const handleChangePunchline = (
-    event: ChangeEventHandler<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setPunchline(event.target.value as string);
   };
 
-  const handleSubmit = (e: React.FormEventHandler<HTMLFormElement>) => {
-    e.perventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     const joke: Joke = {
       category: category,
-      delivery: delivery,
-      punchline: punchline,
+      setup: delivery,
+      delivery: punchline,
     };
-
     callback(joke);
   };
 
@@ -45,13 +46,13 @@ const form = (
       <TextField
         label="delivery"
         value={delivery}
-        defaultValue={defaultValue?.delivery}
+        defaultValue={defaultValue?.setup}
         onChange={handleChangeDelivery}
       />
       <TextField
         label="Punch Line"
         value={punchline}
-        defaultValue={defaultValue?.punchline}
+        defaultValue={defaultValue?.delivery}
         onChange={handleChangePunchline}
       />
 
@@ -59,7 +60,7 @@ const form = (
         value={category}
         label="Category"
         onChange={handleChange}
-        defaultValue={defaultValue?.category}
+        defaultValue={defaultValue?.category || "Dark"}
       >
         <MenuItem value={"Programming"}>Programming</MenuItem>
         <MenuItem value={"Miscellaneous"}>Miscellaneous</MenuItem>
@@ -67,8 +68,10 @@ const form = (
         <MenuItem value={"Pun"}>Pun</MenuItem>
         <MenuItem value={"Spooky"}>Spooky</MenuItem>
       </Select>
+
+      <Button type="submit">send</Button>
     </form>
   );
 };
 
-export default form;
+export default Form;

@@ -5,6 +5,7 @@ import JokeBox from "./JokeBox";
 type Props = {
   jokes: Joke[];
   isStared: Boolean;
+  ownJoke: Boolean;
 };
 
 const JokeWraper = (props: Props) => {
@@ -12,7 +13,12 @@ const JokeWraper = (props: Props) => {
     <section>
       {props.jokes?.length != 0 &&
         props.jokes?.map((joke) => (
-          <JokeBox joke={joke} key={joke.id} isStared={props.isStared} />
+          <JokeBox
+            joke={joke}
+            key={joke.id}
+            isStared={props.isStared}
+            ownJoke={props.ownJoke}
+          />
         ))}
     </section>
   );
