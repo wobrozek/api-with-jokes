@@ -11,7 +11,7 @@ const Main = () => {
   const api = useSelector((state: RootState) => state.jokes);
 
   useEffect(() => {
-    if (!api.jokes.length) {
+    if (!api.jokes?.length) {
       dispatch(fetchGet());
     }
   }, []);
